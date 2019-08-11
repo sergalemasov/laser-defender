@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeedX = 10f;
     [SerializeField] float moveSpeedY = 5f;
+    [SerializeField] float projectileFiringPeriod = 0.5f;
+
     [SerializeField] GameObject laserPrefab = null;
 
     // state
@@ -18,6 +20,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         SetupMoveBoundaries();
+        StartCoroutine("ListenFire");
     }
 
     void SetupMoveBoundaries()
@@ -42,7 +45,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
-        Fire();
     }
 
     void Move()
@@ -59,11 +61,21 @@ public class Player : MonoBehaviour
         transform.position = new Vector2(newPosX, newPosY);
     }
 
-    void Fire()
+    IEnumerator ListenFire()
     {
-        if (Input.GetButtonDown("Fire1"))
+        while(true)
+        {
+            yield return new WaitUntil(() => Input.GetButtonDown("Fire1"));
+            yield return FireContinuously();
+        }
+    }
+
+    IEnumerator FireContinuously()
+    {
+        while (Input.GetButton("Fire1"))
         {
             Instantiate(laserPrefab, transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(projectileFiringPeriod);
         }
     }
 }

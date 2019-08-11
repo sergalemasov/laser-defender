@@ -16,8 +16,8 @@ public class ProjectileCollector : MonoBehaviour
         
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        Destroy(collision.gameObject);
+        Destroy(collider.gameObject);
     }
 }
