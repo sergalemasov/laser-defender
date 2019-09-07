@@ -4,40 +4,52 @@ using UnityEngine;
 
 public class EnemyPathing : MonoBehaviour
 {
-    [SerializeField] List<Transform> waypoints = new List<Transform>();
-    [SerializeField] float speed = 1f;
-
+    WaveConfig waveConfig;
     int currentWaypointindex = 0;
-    float step;
+
+    bool isInitialized = false;
     // Start is called before the first frame update
     void Start()
     {
-        CalculateStep();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveTowardsToWaypoint();
-    }
+        if (!isInitialized)
+        {
+            return;
+        }
 
-    void CalculateStep()
-    {
-        step = speed * Time.deltaTime;
+        MoveTowardsToWaypoint();
     }
 
     void MoveTowardsToWaypoint()
     {
-        if (transform.position == waypoints[currentWaypointindex].position)
+        if (transform.position == waveConfig.GetWaypoints()[currentWaypointindex].position)
         {
             currentWaypointindex++;
         }
 
-        if (currentWaypointindex == waypoints.Count)
+        if (currentWaypointindex == waveConfig.GetWaypoints().Count)
         {
             Destroy(gameObject);
+
+            return;
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointindex].position, step);
+        transform.position = Vector2.MoveTowards(
+            transform.position, 
+            waveConfig.GetWaypoints()[currentWaypointindex].position, 
+            waveConfig.GetMoveSpeed() * Time.deltaTime
+        );
+    }
+
+    public void Initialize(WaveConfig waveConfig)
+    {
+        this.waveConfig = waveConfig;
+
+        isInitialized = true;
     }
 }

@@ -25,12 +25,4 @@ public class Laser : MonoBehaviour
     {
         selfRigidBody2D.velocity = new Vector2(0, missileSpeed);
     }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.name == "MissileCollector")
-        {
-            Destroy(gameObject);
-        }
-    }
 }
