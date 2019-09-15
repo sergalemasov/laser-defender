@@ -111,6 +111,8 @@ MonoBehaviour:
   minTimeBetweenShots: 0.2
   maxTimeBetweenShots: 3
   projectileSpeed: -10
+  explosionPrefab: {fileID: 2646816903704008969, guid: 7a5921fb154a4014ebde5b032d461ff6,
+    type: 3}
   laserPrefab: {fileID: 8420097269870750295, guid: 750a786f6438a4b4991d0b573d7028d4,
     type: 3}
 --- !u!68 &2969564705896714854

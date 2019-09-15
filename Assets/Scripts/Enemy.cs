@@ -9,7 +9,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] float minTimeBetweenShots = 0.2f;
     [SerializeField] float maxTimeBetweenShots = 3f;
     [SerializeField] float projectileSpeed = -10f;
+    [SerializeField] float explosionDuration = 0.5f;
 
+    [SerializeField] GameObject explosionPrefab = null;
     [SerializeField] GameObject laserPrefab = null;
 
     // Start is called before the first frame update
@@ -38,7 +40,7 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            Explode();
         }
     }
 
@@ -62,5 +64,13 @@ public class Enemy : MonoBehaviour
     void RenewShotCounter()
     {
         shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+    }
+
+    void Explode()
+    {
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        Destroy(explosion, explosionDuration);
+        Destroy(gameObject);
     }
 }
