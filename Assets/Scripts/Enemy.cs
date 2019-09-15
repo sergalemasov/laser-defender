@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float shotCounter;
     [SerializeField] float minTimeBetweenShots = 0.2f;
     [SerializeField] float maxTimeBetweenShots = 3f;
+    [SerializeField] float projectileSpeed = -10f;
 
     [SerializeField] GameObject laserPrefab = null;
 
@@ -26,11 +27,6 @@ public class Enemy : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
-
-        if (damageDealer.IsEnemy())
-        {
-            return;
-        }
 
         ProcessHit(damageDealer);
     }
@@ -59,7 +55,8 @@ public class Enemy : MonoBehaviour
 
     void Fire()
     {
-        Instantiate(laserPrefab, transform.position, Quaternion.identity);
+        GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+        laser.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
     }
 
     void RenewShotCounter()

@@ -10,11 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4096042969956422377}
   - component: {fileID: 1048952035783968934}
-  - component: {fileID: -2973291389678328697}
   - component: {fileID: -3298921031415409099}
   - component: {fileID: 2361775439363908817}
   - component: {fileID: -2099146242949391446}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,19 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-2973291389678328697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3927996274914858475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1afa11207a614c048a9c3b5e901b76dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  missileSpeed: 10
 --- !u!50 &-3298921031415409099
 Rigidbody2D:
   serializedVersion: 4
@@ -146,3 +132,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
+  isEnemy: 0

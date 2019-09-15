@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageDealer : MonoBehaviour
 {
     [SerializeField] int damage = 100;
-    [SerializeField] bool isEnemy = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,11 +16,6 @@ public class DamageDealer : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public bool IsEnemy()
-    {
-        return isEnemy;
     }
 
     public int GetDamage()

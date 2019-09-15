@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player:")]
     [SerializeField] float moveSpeedX = 10f;
-    [SerializeField] float moveSpeedY = 5f;
-    [SerializeField] float projectileFiringPeriod = 0.5f;
+    [SerializeField] float moveSpeedY = 10f;
+    [SerializeField] int health = 200;
 
+    [Header("Projectile:")]
     [SerializeField] GameObject laserPrefab = null;
+    [SerializeField] float projectileFiringPeriod = 0.5f;
+    [SerializeField] float projectileSpeed = 10f;
 
     // state
     Vector3 minCoords;
@@ -74,8 +78,33 @@ public class Player : MonoBehaviour
     {
         while (Input.GetButton("Fire1"))
         {
-            Instantiate(laserPrefab, transform.position, Quaternion.identity);
+            GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+            laser.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
+            
+
             yield return new WaitForSeconds(projectileFiringPeriod);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
+
+        if (!damageDealer) {
+            return;
+        }
+
+        ProcessHit(damageDealer);
+    }
+
+    void ProcessHit(DamageDealer damageDealer)
+    {
+        health -= damageDealer.GetDamage();
+        damageDealer.Hit();
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
