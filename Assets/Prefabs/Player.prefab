@@ -96,10 +96,16 @@ MonoBehaviour:
   moveSpeedX: 20
   moveSpeedY: 20
   health: 200
+  explosionDuration: 0.5
   laserPrefab: {fileID: 3927996274914858475, guid: bbf6aeaf50aaca843ab3da91c4e4ac1d,
     type: 3}
   projectileFiringPeriod: 0.1
   projectileSpeed: 20
+  explosionPrefab: {fileID: 2646816903704008969, guid: 7a5921fb154a4014ebde5b032d461ff6,
+    type: 3}
+  laserSound: {fileID: 8300000, guid: fc97577e4f844ba49ba2e0e2447ede6b, type: 3}
+  explosionSound: {fileID: 8300000, guid: 57b067153310e3943bce165b634701b4, type: 3}
+  soundVolume: 0.5
 --- !u!68 &5254496374166076039
 EdgeCollider2D:
   m_ObjectHideFlags: 0

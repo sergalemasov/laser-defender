@@ -9,11 +9,20 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeedX = 10f;
     [SerializeField] float moveSpeedY = 10f;
     [SerializeField] int health = 200;
+    [SerializeField] float explosionDuration = 0.5f;
 
     [Header("Projectile:")]
     [SerializeField] GameObject laserPrefab = null;
     [SerializeField] float projectileFiringPeriod = 0.5f;
     [SerializeField] float projectileSpeed = 10f;
+
+    [Header("VFX:")]
+    [SerializeField] GameObject explosionPrefab = null;
+
+    [Header("SFX:")]
+    [SerializeField] AudioClip laserSound = null;
+    [SerializeField] AudioClip explosionSound = null;
+    [SerializeField] [Range(0, 1)] float soundVolume = 0.7f;
 
     // state
     Vector3 minCoords;
@@ -80,7 +89,8 @@ public class Player : MonoBehaviour
         {
             GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
             laser.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
-            
+            AudioSource.PlayClipAtPoint(laserSound, Camera.main.transform.position, soundVolume / 3);
+
 
             yield return new WaitForSeconds(projectileFiringPeriod);
         }
@@ -104,6 +114,11 @@ public class Player : MonoBehaviour
 
         if (health <= 0)
         {
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion, explosionDuration);
+
+            AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, soundVolume);
+
             Destroy(gameObject);
         }
     }

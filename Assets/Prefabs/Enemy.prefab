@@ -118,8 +118,8 @@ MonoBehaviour:
     type: 3}
   laserPrefab: {fileID: 8420097269870750295, guid: 750a786f6438a4b4991d0b573d7028d4,
     type: 3}
-  laserSound: {fileID: 8300000, guid: a66fc59030272744c9c2f769336ac5f0, type: 3}
-  explosionSound: {fileID: 8300000, guid: dad6a080e78251c488f30ecd7582b0d7, type: 3}
+  laserSound: {fileID: 8300000, guid: d6fc1f8fea2f0da4a89cac7224eae6e4, type: 3}
+  explosionSound: {fileID: 8300000, guid: aac29af6b92e49a47a709695f6a9d650, type: 3}
 --- !u!68 &2969564705896714854
 EdgeCollider2D:
   m_ObjectHideFlags: 0
