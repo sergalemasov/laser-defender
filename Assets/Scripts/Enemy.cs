@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float maxTimeBetweenShots = 3f;
     [SerializeField] float projectileSpeed = -10f;
     [SerializeField] float explosionDuration = 0.5f;
+    [SerializeField] int killScore = 100;
 
     [SerializeField] [Range(0, 1)] float soundVolume = 0.7f;
 
@@ -18,13 +19,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] AudioClip laserSound = null;
     [SerializeField] AudioClip explosionSound = null;
 
-    private AudioSource audioSource;
+    private GameSession gameSession = null;
 
     // Start is called before the first frame update
     void Start()
     {
         RenewShotCounter();
-        audioSource = GetComponent<AudioSource>();
+        gameSession = FindObjectOfType<GameSession>();
     }
 
     // Update is called once per frame
@@ -52,7 +53,7 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
-            Explode();
+            Die();
         }
     }
 
@@ -80,12 +81,14 @@ public class Enemy : MonoBehaviour
         shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
     }
 
-    void Explode()
+    void Die()
     {
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, explosionDuration);
 
         AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, soundVolume);
+
+        gameSession.AddScore(killScore);
 
         Destroy(gameObject);
     }

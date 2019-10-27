@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class Level : MonoBehaviour
 {
     [SerializeField] float loadDelay = 1f;
+
+    private GameSession gameSession = null;
+
     public void LoadStartMenu()
     {
         SceneManager.LoadScene(0);
@@ -13,7 +16,7 @@ public class Level : MonoBehaviour
 
     public void LoadGame()
     {
-        Debug.Log("Click");
+        gameSession.ResetGame();
         SceneManager.LoadScene("Game");
     }
 
@@ -31,5 +34,10 @@ public class Level : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    void Start()
+    {
+        gameSession = FindObjectOfType<GameSession>();
     }
 }
