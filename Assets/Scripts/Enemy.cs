@@ -42,6 +42,11 @@ public class Enemy : MonoBehaviour
 
     void ProcessHit(DamageDealer damageDealer)
     {
+        if (!damageDealer)
+        {
+            return;
+        }
+
         health -= damageDealer.GetDamage();
         damageDealer.Hit();
 

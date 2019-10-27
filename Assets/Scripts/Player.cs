@@ -114,12 +114,20 @@ public class Player : MonoBehaviour
 
         if (health <= 0)
         {
-            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            Destroy(explosion, explosionDuration);
-
-            AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, soundVolume);
-
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    void Die()
+    {
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        Destroy(explosion, explosionDuration);
+
+        AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, soundVolume);
+
+        Destroy(gameObject);
+
+        Level level = FindObjectOfType<Level>();
+        level.LoadGameOver();
     }
 }
