@@ -19,13 +19,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] AudioClip laserSound = null;
     [SerializeField] AudioClip explosionSound = null;
 
-    private GameSession gameSession = null;
-
     // Start is called before the first frame update
     void Start()
     {
         RenewShotCounter();
-        gameSession = FindObjectOfType<GameSession>();
     }
 
     // Update is called once per frame
@@ -88,7 +85,7 @@ public class Enemy : MonoBehaviour
 
         AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position, soundVolume);
 
-        gameSession.AddScore(killScore);
+        FindObjectOfType<GameSession>().AddScore(killScore);
 
         Destroy(gameObject);
     }

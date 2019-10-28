@@ -9,7 +9,6 @@ public class GameSession : MonoBehaviour
     public void AddScore(int score)
     {
         totalScore += score;
-        Debug.Log(totalScore);
     }
 
     public int GetScore()
@@ -19,7 +18,7 @@ public class GameSession : MonoBehaviour
 
     public void ResetGame()
     {
-        ClearScore();
+        Destroy(gameObject);
     }
 
     void Awake()
@@ -37,17 +36,12 @@ public class GameSession : MonoBehaviour
     {
         if (FindObjectsOfType(GetType()).Length > 1)
         {
+            gameObject.SetActive(false);
             Destroy(gameObject);
         }
         else
         {
             DontDestroyOnLoad(gameObject);
         }
-    }
-
-    
-    void ClearScore()
-    {
-        totalScore = 0;
     }
 }
