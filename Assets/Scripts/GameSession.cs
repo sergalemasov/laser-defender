@@ -5,15 +5,26 @@ using UnityEngine;
 public class GameSession : MonoBehaviour
 {
     private int totalScore = 0;
+    private int playerHealth = 0;
 
     public void AddScore(int score)
     {
         totalScore += score;
     }
 
+    public void UpdateHealth(int health)
+    {
+        playerHealth = health;
+    }
+
     public int GetScore()
     {
         return totalScore;
+    }
+
+    public int GetHealth()
+    {
+        return playerHealth;
     }
 
     public void ResetGame()

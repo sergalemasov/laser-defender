@@ -29,11 +29,15 @@ public class Player : MonoBehaviour
     Vector3 maxCoords;
     Vector3 selfSize;
 
+    GameSession gameSession = null;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameSession = FindObjectOfType<GameSession>();
         SetupMoveBoundaries();
         StartCoroutine("ListenFire");
+        gameSession.UpdateHealth(health);
     }
 
     void SetupMoveBoundaries()
@@ -110,9 +114,12 @@ public class Player : MonoBehaviour
     void ProcessHit(DamageDealer damageDealer)
     {
         health -= damageDealer.GetDamage();
+        health = health >= 0 ? health : 0;
         damageDealer.Hit();
 
-        if (health <= 0)
+        gameSession.UpdateHealth(health);
+
+        if (health == 0)
         {
             Die();
         }
